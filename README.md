@@ -1,3 +1,3 @@
-# New-Portfolio
+# Digital marketing SEO Portfolio
 
-https://pritam-khaple.netlify.app/
+https://pritam-khaple-seo-portfolio.netlify.app/
