@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 70%;
+            max-width: 1000px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            background: #fff;
+        }
+
+        .slide-content {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .big-img {
+            width: 60%;
+            height: auto;
+            max-height: 300px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .text-area {
+            width: 35%;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .text-area h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .text-area p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .thumbnail-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .thumbnail-wrapper {
+            text-align: center;
+        }
+
+        .thumbnail {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.3s ease, border 0.3s ease;
+            opacity: 0.6;
+            border: 2px solid transparent;
+        }
+
+        .thumbnail:hover {
+            transform: scale(1.1);
+        }
+
+        .thumbnail-title {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .thumbnail.active-thumbnail {
+            opacity: 1;
+            border: 2px solid #28a745;
+            /* base border color */
+            box-shadow: 0 0 10px #28a745, 0 0 20px #28a745, 0 0 30px #28a745, 0 0 40px #28a745;
+        }
+
+        .navigation-btns {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 20px;
+        }
+
+        .prev,
+        .next {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .slider-container {
+                width: 90%;
+            }
+
+            .slide-content {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .big-img {
+                width: 100%;
+                max-height: 250px;
+            }
+
+            .text-area {
+                width: 100%;
+                text-align: center;
+            }
+
+            .thumbnail-container {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                gap: 5px;
+                padding-bottom: 10px;
+            }
+
+            .thumbnail-wrapper {
+                display: inline-block;
+            }
+
+            .thumbnail {
+                width: 50px;
+                height: 50px;
+            }
+
+            .thumbnail-title {
+                font-size: 12px;
+            }
+
+            .prev,
+            .next {
+                font-size: 20px;
+                padding: 10px 20px;
+            }
+
+            /* Move navigation buttons below thumbnails on mobile */
+            .navigation-btns {
+                position: static;
+                display: flex;
+                justify-content: center;
+                margin-top: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .big-img {
+                height: auto;
+            }
+
+            .thumbnail {
+                width: 40px;
+                height: 40px;
+            }
+
+            .thumbnail-title {
+                font-size: 10px;
+            }
+
+            .prev,
+            .next {
+                font-size: 18px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+    <title>Responsive Slider with 6 Slides</title>
+</head>
+
+<body>
+    <div class="slider-container">
+        <div class="slider">
+            <!-- Slides -->
+            <div class="slide">
+                <div class="slide-content">
+                    <img src="/assets/bg/bg-picture-01.webp" alt="Big Image 1" class="big-img">
+                    <div class="text-area">
+                        <h2>Residential Roofing 1</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Sed non
+                            risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.
+                            Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non,
+                            mi.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-content">
+                    <img src="/assets/bg/bg-picture-02.webp" alt="Big Image 2" class="big-img">
+                    <div class="text-area">
+                        <h2>Residential Roofing 2</h2>
+                        <p>Aliquam feugiat, libero vitae vehicula aliquet, lorem purus interdum orci. Cras elementum
+                            ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Sed non
+                            risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-content">
+                    <img src="/assets/bg/bg-picture-03.webp" alt="Big Image 3" class="big-img">
+                    <div class="text-area">
+                        <h2>Residential Roofing 3</h2>
+                        <p>Praesent lacinia nulla at scelerisque posuere. Integer consectetur mauris a nisi dictum.
+                            Fusce vitae magna ac ante aliquam maximus non ac ligula. Curabitur at libero felis. Etiam
+                            placerat justo sit amet urna dictum, vel iaculis ante tempus.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-content">
+                    <img src="/assets/bg/bg-picture-04.webp" alt="Big Image 4" class="big-img">
+                    <div class="text-area">
+                        <h2>Residential Roofing 4</h2>
+                        <p>Donec et risus nec dui pretium consequat. Etiam sed magna eget urna ultricies sagittis.
+                            Pellentesque ultricies convallis auctor. Vivamus at nibh sit amet ante cursus viverra sed
+                            vel tortor. Integer non nisl ante, in interdum elit. Vestibulum dui nisl, pharetra eget
+                            pretium eget.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-content">
+                    <img src="/assets/bg/bg-picture-05.webp" alt="Big Image 5" class="big-img">
+                    <div class="text-area">
+                        <h2>Residential Roofing 5</h2>
+                        <p>Fusce eget neque vel arcu accumsan viverra. Maecenas vel magna non nisl sollicitudin
+                            tincidunt. Nulla volutpat orci ut ex tempor vulputate. Curabitur at erat vitae erat
+                            ultricies auctor non a lorem. Suspendisse in velit bibendum, consequat purus in, vulputate
+                            nulla. Duis sit amet facilisis ligula.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-content">
+                    <img src="/assets/bg/bg-picture-06.webp" alt="Big Image 6" class="big-img">
+                    <div class="text-area">
+                        <h2>Residential Roofing 6</h2>
+                        <p>Suspendisse potenti. Curabitur ut ligula in justo vehicula cursus vel non sapien. Integer
+                            viverra velit nec ullamcorper sollicitudin. Vestibulum at dolor et sapien feugiat volutpat
+                            non et lorem. Aenean interdum leo vel turpis tincidunt, in eleifend nulla aliquam.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thumbnails -->
+        <div class="thumbnail-container">
+            <div class="thumbnail-wrapper">
+                <img src="/assets/bg/bg-picture-01.webp" alt="Thumbnail 1" class="thumbnail" onclick="moveToSlide(0)">
+                <div class="thumbnail-title">Residential <br> inspection <br> Roofing 1</div>
+            </div>
+            <div class="thumbnail-wrapper">
+                <img src="/assets/bg/bg-picture-02.webp" alt="Thumbnail 2" class="thumbnail" onclick="moveToSlide(1)">
+                <div class="thumbnail-title">Residential <br> inspection <br> Roofing 2</div>
+            </div>
+            <div class="thumbnail-wrapper">
+                <img src="/assets/bg/bg-picture-03.webp" alt="Thumbnail 3" class="thumbnail" onclick="moveToSlide(2)">
+                <div class="thumbnail-title">Residential <br> inspection <br> Roofing 3</div>
+            </div>
+            <div class="thumbnail-wrapper">
+                <img src="/assets/bg/bg-picture-04.webp" alt="Thumbnail 4" class="thumbnail" onclick="moveToSlide(3)">
+                <div class="thumbnail-title">Residential <br> inspection <br> Roofing 4</div>
+            </div>
+            <div class="thumbnail-wrapper">
+                <img src="/assets/bg/bg-picture-05.webp" alt="Thumbnail 5" class="thumbnail" onclick="moveToSlide(4)">
+                <div class="thumbnail-title">Residential <br> inspection <br> Roofing 5</div>
+            </div>
+            <div class="thumbnail-wrapper">
+                <img src="/assets/bg/bg-picture-06.webp" alt="Thumbnail 6" class="thumbnail" onclick="moveToSlide(5)">
+                <div class="thumbnail-title">Residential <br> inspection <br> Roofing 6</div>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons (Below Thumbnails) -->
+        <div class="navigation-btns">
+            <button class="prev" onclick="moveSlide(-1)">❮</button>
+            <button class="next" onclick="moveSlide(1)">❯</button>
+        </div>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+
+        function moveSlide(step) {
+            const slides = document.querySelectorAll('.slide');
+            slideIndex = (slideIndex + step + slides.length) % slides.length;
+            updateSlider();
+        }
+
+        function moveToSlide(index) {
+            slideIndex = index;
+            updateSlider();
+        }
+
+        function updateSlider() {
+            const slider = document.querySelector('.slider');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+
+            slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+
+            thumbnails.forEach((thumbnail, index) => {
+                if (index === slideIndex) {
+                    thumbnail.classList.add('active-thumbnail');
+                } else {
+                    thumbnail.classList.remove('active-thumbnail');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', updateSlider);
+    </script>
+</body>
+
+</html>
